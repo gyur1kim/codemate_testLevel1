@@ -75,7 +75,7 @@
                 if(sum>num){
                     break;
                 }
-                if(sum === num){
+                else if(sum === num){
                     var tmpArr = primeArr.slice(j, k+1);
                     console.log(`연속된 소수 [${tmpArr}]의 합은 ${num}입니다!`);
                     return;
