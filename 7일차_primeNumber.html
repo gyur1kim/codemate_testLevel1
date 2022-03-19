@@ -88,9 +88,38 @@
         console.log(`연속된 소수의 합으로 ${num}을 만들 수 없습니다.`);
     }
 
+    //8일차에 배운 twoPointer를 이용한 연속된 소수의 합 구하기
+    function twoPointerAnswer(num){
+        var primeArr = [];
+        for(var i=2; i<num; i++){
+            if(isPrime(i)){
+                primeArr.push(i);
+            }
+        }
+        var start = 0, end = 0;
+        var sum = primeArr[0];
+        while(primeArr[start] <= num){
+            if(sum < num){
+                end++;
+                sum += primeArr[end];
+            }
+            else if(sum > num ||end===primeArr.length){
+                sum -= primeArr[start];
+                start++;
+            }
+            else if(sum === num){
+                var tmp = primeArr.slice(start, end+1);
+                console.log(`연속된 소수 [${tmp}]의 합은 ${num}입니다!`);
+                return;
+            }
+        }
+        console.log(`연속된 소수의 합으로 ${num}을 만들 수 없습니다.`);
+    }
+
 
     var n = parseInt(prompt("수를 적어주세요"));
     answer(n);
+    twoPointerAnswer(n);
     if(isPrime(n)){
         alert(`${n}은 소수입니다.`);
     }
