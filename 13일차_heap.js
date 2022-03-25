@@ -35,18 +35,20 @@ class Heap{
         }
     }
 
-    pop(data){
-        for(var i=1; i<=this.heapCount; i++){
-            if(this.arr[i] === data){
-                this.arr[i] = this.arr[this.heapCount];
-                this.arr[this.heapCount] = null;
-                this.heapCount--;
-                this.compareWithChild(i);
-                return;
-            }
+    pop(){
+        var data = this.arr[1];
+
+        if(this.heapCount === 1){
+            this.arr[this.heapCount--] = null;
+            console.log(`${data} 출력`);
+            return data;
         }
-        console.log("데이터가 존재하지 않습니다.");
-        return;
+
+        this.arr[1] = this.arr[this.heapCount];
+        this.arr[this.heapCount--] = null;
+        this.compareWithChild(1);
+        console.log(`${data} 출력`);
+        return data;
     }
     compareWithChild(idx){
         if(idx > this.heapCount){
@@ -96,10 +98,9 @@ heap.insert(9);
 heap.insert(10);
 heap.insert(11);
 heap.insert(2);
-console.log(heap);
-console.log("---------");
 heap.pop(5);
 heap.pop(1);
+console.log(heap);
 
 var input=`9 "JAVA_익히기"
 6 "파이썬_프로젝트_시작하기"
@@ -114,4 +115,12 @@ console.log(todoArr);
 for(var idx in todoArr){
     todoHeap.insert(parseInt(todoArr[idx][0]));
 }
-console.log(todoHeap);
+
+for(var i=0; i<3; i++){
+    var num = todoHeap.pop();
+    for(var idx in todoArr){
+        if(num == todoArr[idx][0]){
+            console.log(`해야하는 일 : 우선순위 ${todoArr[idx][0]}, ${todoArr[idx][1]}`);
+        }
+    }
+}
