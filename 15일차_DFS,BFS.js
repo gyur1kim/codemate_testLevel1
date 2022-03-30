@@ -53,11 +53,11 @@ class Graph{
 }
 
 function DFS(graph, num){
-    console.log(num);
     graph.visited[num] = 1;
 
     for(let i=0; i<graph.nodeCount; i++){
         if(graph.graph[num][i] === 1 && graph.visited[i] === 0){
+            console.log(num, i);
             DFS(graph, i);
         }
     }
@@ -66,7 +66,23 @@ function DFS(graph, num){
 function BFS(graph, node){
     var queue = new Queue();
     graph.visited[node] = 1;
+    console.log(node);
+    queue.enqueue(node);
+
+    while(!queue.isEmpty()){
+        let v = queue.dequeue()
+
+        for(let w = 0; w<graph.nodeCount; w++){
+            if(graph.graph[v][w] === 1 && graph.visited[w] === 0){
+                graph.visited[w] = 1;
+                console.log(w);
+                queue.enqueue(w);
+            }
+        }
+    }
 }
 
 var graph = new Graph();
+graph.visited[0] = 1;
 DFS(graph, 0);
+BFS(graph, 0);
